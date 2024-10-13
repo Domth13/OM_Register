@@ -8,16 +8,35 @@ import os
 # API URL
 API_URL = os.environ.get("API_URL")
 
-USERNAME_INFO = """
-Please use the following infos to create your username (use lowercase letters and write them in the same sequence without whitespace between.) \n
-1. First letter of the first name of your mother (or the most important female reference person in your childhood):\n
-2. First letter of the first name of your father (or the most important male reference person in your childhood):\n
-3. First letter of your birthplace:\n
-4. Birth month of your mother as number (01-12) (or the most important female reference person in your childhood):\n
-5. Birth year of your father (in this format yyyy) (or the most important male reference person in your childhood):\n
 
-Example: hag061960
+REGISTRATION_INFO = """
+### Registration Instructions
+
+**1. Username Creation:**
+
+Please create your username using the following format (use lowercase letters and follow the sequence exactly without spaces):
+
+- **Step 1**: First letter of your mother’s first name (or the most important female reference person in your childhood).
+- **Step 2**: First letter of your father’s first name (or the most important male reference person in your childhood).
+- **Step 3**: First letter of the city where you were born.
+- **Step 4**: Birth month of your mother (or the most important female reference person in your childhood) as a two-digit number (01-12).
+- **Step 5**: Birth year of your father (or the most important male reference person in your childhood) in four digits (yyyy).
+
+**Example**: If your mother's name is Helen, your father's name is George, you were born in Amsterdam, your mother’s birth month is June (06), and your father’s birth year is 1960, your username would be:
+
+`hag061960`
+
+**2. Registration Process:**
+
+- **Step 1**: Enter the username you generated using the above instructions.
+- **Step 2**: Create a strong password for your account.
+- **Step 3**: Enter the unique security code provided to you.
+
+Once you've filled in all the required information, click **Register** to complete the process.
+
+If any issues arise, please check that all information is entered correctly or contact support for assistance.
 """
+
 
 def register_user(username, password, security_code):
     """Registers the user with the FastAPI backend."""
@@ -43,7 +62,7 @@ def register_user(username, password, security_code):
 
 # Streamlit UI
 st.title("OM Register User")
-st.markdown(USERNAME_INFO)
+st.markdown(REGISTRATION_INFO)
 
 # Input fields
 username = st.text_input("Username", placeholder="Enter your username")
