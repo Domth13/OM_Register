@@ -6,7 +6,18 @@ import os
 #load_dotenv()
 
 # API URL
-API_URL = os.environ.get("API_URL_TEST")
+API_URL = os.environ.get("API_URL")
+
+USERNAME_INFO = """
+Please use the following infos to create your username (use lowercase letters and write them in the same sequence without whitespace between.) \n
+1. First letter of the first name of your mother (or the most important female reference person in your childhood):\n
+2. First letter of the first name of your father (or the most important male reference person in your childhood):\n
+3. First letter of your birthplace:\n
+4. Birth month of your mother as number (01-12) (or the most important female reference person in your childhood):\n
+5. Birth year of your father (in this format yyyy) (or the most important male reference person in your childhood):\n
+
+Example: hag061960
+"""
 
 def register_user(username, password, security_code):
     """Registers the user with the FastAPI backend."""
@@ -31,7 +42,8 @@ def register_user(username, password, security_code):
         return None, "Unexpected Error: {}".format(err)
 
 # Streamlit UI
-st.title("Register User")
+st.title("OM Register User")
+st.markdown(USERNAME_INFO)
 
 # Input fields
 username = st.text_input("Username", placeholder="Enter your username")
