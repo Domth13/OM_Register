@@ -22,7 +22,7 @@ Please create your username using the following format (use lowercase letters an
 - **Step 4**: Birth month of your mother (or the most important female reference person in your childhood) as a two-digit number (01-12).
 - **Step 5**: Birth year of your father (or the most important male reference person in your childhood) in four digits (yyyy).
 
-**Example**: If your mother's name is Helen, your father's name is George, you were born in Amsterdam, your mother’s birth month is June (06), and your father’s birth year is 1960, your username would be:
+**Example**: If your mother's name is Helen, your father's name is Andrew, you were born in Geneva, your mother’s birth month is June (06), and your father’s birth year is 1960, your username would be:
 
 `hag061960`
 
