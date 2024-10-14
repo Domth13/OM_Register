@@ -1,13 +1,10 @@
 import streamlit as st
 import requests
 import os
-#from dotenv import load_dotenv
-
-#load_dotenv()
+import re
 
 # API URL
 API_URL = os.environ.get("API_URL")
-
 
 REGISTRATION_INFO = """
 ### Registration Instructions
@@ -37,7 +34,12 @@ Once you've filled in all the required information, click **Register** to comple
 If any issues arise, please check that all information is entered correctly or contact support for assistance.
 """
 
+# Function to validate the username format
+def validate_username(username):
+    pattern = r"^[a-z]{3}\d{2}\d{4}$"  # 3 lowercase letters, 2 digits for month, 4 digits for year
+    return re.match(pattern, username)
 
+# Function to register the user
 def register_user(username, password, security_code):
     """Registers the user with the FastAPI backend."""
     payload = {
@@ -67,10 +69,20 @@ st.markdown(REGISTRATION_INFO)
 # Input fields
 username = st.text_input("Username", placeholder="Enter your username")
 password = st.text_input("Password", type="password", placeholder="Enter your password")
+password_confirm = st.text_input("Confirm Password", type="password", placeholder="Re-enter your password")
 security_code = st.text_input("Security Code", placeholder="Enter your security code")
 
 if st.button("Register"):
-    if username and password and security_code:
+    # Username validation
+    if not validate_username(username):
+        st.error("Invalid username format. Please follow the instructions.")
+    # Password validation
+    elif password != password_confirm:
+        st.error("Passwords do not match. Please try again.")
+    elif not password or not password_confirm:
+        st.warning("Please fill in all password fields.")
+    # All fields are valid, proceed with registration
+    elif username and password and password_confirm and security_code:
         user, error = register_user(username, password, security_code)
         if user:
             st.success("User registered successfully!")
@@ -78,3 +90,4 @@ if st.button("Register"):
             st.error(f"Registration failed: {error}")
     else:
         st.warning("Please fill in all fields.")
+
